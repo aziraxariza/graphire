@@ -4,6 +4,7 @@ import PathSection from "../components/PathSection";
 import SkillProgress from "../components/SkillProgress";
 import OpportunityCard from "../components/OpportunityCard";
 import PeopleCard from "../components/PeopleCard";
+import CareerGraph from "../components/CareerGraph";
 import { useRef } from "react";
 
 const FEED = [
@@ -151,9 +152,15 @@ export default function Dashboard() {
           ))}
         </div>
 
+        {/* CAREER GRAPH ANIMATION */}
+        <div style={{ padding: "72px 56px", borderBottom: "1px solid var(--border)", background: "rgba(15,18,28,0.4)" }}>
+          <SectionHeader num="02" eyebrow="Spanning graph" heading="Your skill" italic="constellation" />
+          <CareerGraph />
+        </div>
+
         {/* PATH */}
         <div id="path" style={{ padding: "72px 56px", borderBottom: "1px solid var(--border)" }}>
-          <SectionHeader num="02" eyebrow="Career path" heading="Shortest route from" italic="you to your goal" italicColor="var(--teal)" />
+          <SectionHeader num="03" eyebrow="Career path" heading="Shortest route from" italic="you to your goal" italicColor="var(--teal)" />
           <div style={{
             background: "rgba(15,18,32,0.8)",
             backdropFilter: "blur(18px)",
@@ -175,19 +182,19 @@ export default function Dashboard() {
 
         {/* OPPORTUNITIES */}
         <div style={{ padding: "72px 56px", borderBottom: "1px solid var(--border)", background: "rgba(15,18,28,0.4)" }}>
-          <SectionHeader num="03" eyebrow="Matched for you · 2026" eyebrowColor="var(--pink)" heading="Opportunities from" italic="your graph" italicColor="var(--pink)" />
+          <SectionHeader num="04" eyebrow="Matched for you · 2026" eyebrowColor="var(--pink)" heading="Opportunities from" italic="your graph" italicColor="var(--pink)" />
           <OppCarousel items={OPPS} />
         </div>
 
         {/* SKILLS */}
         <div id="skills" style={{ padding: "72px 56px", borderBottom: "1px solid var(--border)" }}>
-          <SectionHeader num="04" eyebrow="Skill intelligence" heading="Know exactly what you're" italic="missing" />
+          <SectionHeader num="05" eyebrow="Skill intelligence" heading="Know exactly what you're" italic="missing" />
           <SkillProgress />
         </div>
 
         {/* XP / GROWTH */}
         <div style={{ padding: "72px 56px", borderBottom: "1px solid var(--border)", background: "rgba(15,18,28,0.4)" }}>
-          <SectionHeader num="05" eyebrow="Growth system" eyebrowColor="var(--pink)" heading="Make progress" italic="addictive" italicColor="var(--pink)" />
+          <SectionHeader num="06" eyebrow="Growth system" eyebrowColor="var(--pink)" heading="Make progress" italic="addictive" italicColor="var(--pink)" />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "24px", alignItems: "start" }}>
             {/* XP card */}
             <div style={{
@@ -270,7 +277,7 @@ export default function Dashboard() {
 
         {/* NETWORK */}
         <div id="network" style={{ padding: "72px 56px", borderBottom: "1px solid var(--border)" }}>
-          <SectionHeader num="06" eyebrow="Women network" heading="People on the" italic="same path as you" />
+          <SectionHeader num="07" eyebrow="Women network" heading="People on the" italic="same path as you" />
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(188px,1fr))", gap: "12px" }}>
             {PEOPLE.map((p, i) => <PeopleCard key={i} {...p} />)}
           </div>
@@ -278,7 +285,7 @@ export default function Dashboard() {
 
         {/* FEED */}
         <div style={{ padding: "72px 56px", background: "rgba(15,18,28,0.4)" }}>
-          <SectionHeader num="07" eyebrow="Live feed" eyebrowColor="var(--pink)" heading="Your career" italic="in motion" italicColor="var(--pink)" />
+          <SectionHeader num="08" eyebrow="Live feed" eyebrowColor="var(--pink)" heading="Your career" italic="in motion" italicColor="var(--pink)" />
           <div>
             {FEED.map((item, i) => (
               <motion.div

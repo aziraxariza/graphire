@@ -1,5 +1,32 @@
 import { motion } from "framer-motion";
 
+const COMPANY_LOGOS: Record<string, string> = {
+  "Google": "https://logo.clearbit.com/google.com",
+  "Microsoft": "https://logo.clearbit.com/microsoft.com",
+  "Amazon": "https://logo.clearbit.com/amazon.com",
+  "Adobe": "https://logo.clearbit.com/adobe.com",
+  "Flipkart": "https://logo.clearbit.com/flipkart.com",
+  "Goldman Sachs": "https://logo.clearbit.com/goldmansachs.com",
+  "Atlassian": "https://logo.clearbit.com/atlassian.com",
+  "Intuit": "https://logo.clearbit.com/intuit.com",
+  "Nvidia": "https://logo.clearbit.com/nvidia.com",
+  "IBM": "https://logo.clearbit.com/ibm.com",
+  "Girls Who Code": "https://logo.clearbit.com/girlswhocode.com",
+  "Major League Hacking": "https://logo.clearbit.com/mlh.io",
+  "Palantir": "https://logo.clearbit.com/palantir.com",
+  "MIT": "https://logo.clearbit.com/mit.edu",
+  "AnitaB.org": "https://logo.clearbit.com/anitab.org",
+  "Univ. of Waterloo": "https://logo.clearbit.com/uwaterloo.ca",
+  "SheHacks": "https://logo.clearbit.com/shehacks.ca",
+  "UNC Chapel Hill": "https://logo.clearbit.com/unc.edu",
+  "Zepto": "https://logo.clearbit.com/zeptonow.com",
+  "Razorpay": "https://logo.clearbit.com/razorpay.com",
+  "Figma": "https://logo.clearbit.com/figma.com",
+  "Linear": "https://logo.clearbit.com/linear.app",
+  "Cisco": "https://logo.clearbit.com/cisco.com",
+  "Outreachy / Linux Fdn": "https://logo.clearbit.com/linuxfoundation.org",
+};
+
 interface OpportunityCardProps {
   title: string;
   company: string;
@@ -7,9 +34,10 @@ interface OpportunityCardProps {
   tag?: string;
   match?: number;
   deadline?: string;
+  imageUrl?: string;
 }
 
-export default function OpportunityCard({ title, company, location, tag, match, deadline }: OpportunityCardProps) {
+export default function OpportunityCard({ title, company, location, tag, match, deadline, imageUrl }: OpportunityCardProps) {
   const isHigh = (match ?? 0) >= 85;
   const isMid = (match ?? 0) >= 70;
 
@@ -18,6 +46,8 @@ export default function OpportunityCard({ title, company, location, tag, match, 
     : isMid
     ? { color: "var(--pink)", border: "rgba(240,160,192,0.25)", bg: "var(--pink-dim)" }
     : { color: "var(--muted-mid)", border: "rgba(110,117,144,0.2)", bg: "rgba(110,117,144,0.06)" };
+
+  const logoUrl = imageUrl || COMPANY_LOGOS[company] || null;
 
   return (
     <motion.div
@@ -46,23 +76,63 @@ export default function OpportunityCard({ title, company, location, tag, match, 
         background: `linear-gradient(90deg, transparent, ${isHigh ? "rgba(110,212,200,0.5)" : "rgba(240,160,192,0.5)"}, transparent)`,
       }} />
 
-      {tag && (
-        <div style={{
-          fontSize: "9px",
-          letterSpacing: "0.14em",
-          textTransform: "uppercase",
-          color: tagColor.color,
-          border: `1px solid ${tagColor.border}`,
-          background: tagColor.bg,
-          padding: "4px 11px",
-          borderRadius: "100px",
-          display: "inline-block",
-          marginBottom: "16px",
-          fontWeight: 300,
-        }}>
-          {tag}
-        </div>
-      )}
+      {/* Company logo */}
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+        {logoUrl && (
+          <div style={{
+            width: "32px",
+            height: "32px",
+            borderRadius: "8px",
+            background: "rgba(255,255,255,0.06)",
+            border: "1px solid var(--border)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            overflow: "hidden",
+            flexShrink: 0,
+          }}>
+            <img
+              src={logoUrl}
+              alt={company}
+              style={{ width: "22px", height: "22px", objectFit: "contain", borderRadius: "4px" }}
+              onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+            />
+          </div>
+        )}
+        {!logoUrl && (
+          <div style={{
+            width: "32px",
+            height: "32px",
+            borderRadius: "8px",
+            background: isHigh ? "var(--teal-dim)" : "var(--pink-dim)",
+            border: "1px solid var(--border)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "14px",
+            color: isHigh ? "var(--teal)" : "var(--pink)",
+            fontWeight: 400,
+            flexShrink: 0,
+          }}>
+            {company.charAt(0)}
+          </div>
+        )}
+        {tag && (
+          <div style={{
+            fontSize: "9px",
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: tagColor.color,
+            border: `1px solid ${tagColor.border}`,
+            background: tagColor.bg,
+            padding: "4px 11px",
+            borderRadius: "100px",
+            fontWeight: 300,
+          }}>
+            {tag}
+          </div>
+        )}
+      </div>
 
       <h3 style={{
         fontFamily: "'Cormorant Garamond', serif",
