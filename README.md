@@ -29,7 +29,7 @@ Built using GraphSQL and TigerGraph, the platform focuses on creating meaningful
 * **Version Control:** Git & GitHub
 
 ---
-
+  
 ## 📌 How It Works
 
 Graphire uses graph database technology to map relationships between:
