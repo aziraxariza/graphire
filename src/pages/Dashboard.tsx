@@ -6,7 +6,7 @@ import OpportunityCard from "../components/OpportunityCard";
 import PeopleCard from "../components/PeopleCard";
 import CareerGraph from "../components/CareerGraph";
 import { useRef } from "react";
-
+// first check
 const FEED = [
   { text: "New opportunity matched", sub: "Google STEP — 88% match based on your graph", time: "2 minutes ago" },
   { text: "Skill gap closed", sub: "You completed Next.js basics. New path discovered.", time: "1 hour ago" },
